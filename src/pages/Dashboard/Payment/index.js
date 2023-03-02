@@ -7,7 +7,7 @@ export default function Payment() {
     return (
       <>
         <PaymentTitle>Ingresso e pagamento</PaymentTitle>
-        <TextLoad>Você precisa completar sua inscrição antes<br></br>de prosseguir pra escolha de ingresso</TextLoad>
+        <TextSubscription>Você precisa completar sua inscrição antes<br></br>de prosseguir pra escolha de ingresso</TextSubscription>
       </>
     );
   }
@@ -24,7 +24,7 @@ const PaymentTitle = styled.p`
 
   color: #000000;
 `;
-const TextLoad = styled.p`
+const TextSubscription = styled.p`
   margin-top:243px;
   font-family: 'Roboto';
   font-style: normal;
