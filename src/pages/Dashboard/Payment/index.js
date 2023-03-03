@@ -10,6 +10,7 @@ import ChoiceBox from '../../../components/ChoiceBox';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useTicket from '../../../hooks/api/useTicket';
 import useToken from '../../../hooks/useToken';
+import CardScream from '../../../components/Payments/CardScream';
 
 export default function Payment() {
   const navigate = useNavigate();
@@ -54,14 +55,14 @@ export default function Payment() {
   }
 
   // WHEN USER IS NOT ENROLLED OR LOGGED IN
-  while (enrollment === '' || enrollment === undefined || enrollment === null) {
-    return (
-      <>
-        <PaymentTitle>Ingresso e pagamento</PaymentTitle>
-        <TextSubscription>Você precisa completar sua inscrição antes<br></br>de prosseguir pra escolha de ingresso</TextSubscription>
-      </>
-    );
-  }
+  // while (enrollment === '' || enrollment === undefined || enrollment === null) {
+  //   return (
+  //     <>
+  //       <PaymentTitle>Ingresso e pagamento</PaymentTitle>
+  //       <TextSubscription>Você precisa completar sua inscrição antes<br></br>de prosseguir pra escolha de ingresso</TextSubscription>
+  //     </>
+  //   );
+  // }
 
   // WHILE ENROLLMENT AND PAYMENT ARE LOADING, RENDER SPINNER
   while (paymentLoading || enrollmentLoading) {
@@ -72,70 +73,74 @@ export default function Payment() {
     );
   }
 
+  // return (
+  //   <>
+  //     <PaymentTitle>Ingresso e pagamento</PaymentTitle>
+  //     <PaymentSubtitle>Primeiro, escolha sua modalidade de ingresso</PaymentSubtitle>
+  //     <ContainerOptions>
+  //       <ChoiceBox
+  //         description={'Presencial'}
+  //         price={250}
+  //         selectState={isRemoteTicket === '' ? false : isRemoteTicket}
+  //         selector={setIsRemoteTicket}
+  //         setPrice={setTicketPrice}
+  //         disable={false}
+  //       />
+  //       <ChoiceBox
+  //         description={'Online'}
+  //         price={100}
+  //         selectState={isRemoteTicket === '' ? false : !isRemoteTicket}
+  //         selector={setIsRemoteTicket}
+  //         setPrice={setTicketPrice}
+  //         disable={false}
+  //       />
+  //     </ContainerOptions>
+  //     {/* IF TICKETPRICE IS DIFFERENT FROM ZERO, WILL APPEAR THE NEXT OPTIONS */}
+  //     {
+  //       ticketPrice !== 0 && (
+  //         <>
+  //           <PaymentSubtitle>Ótimo! Agora escolha sua modalidade de hospedagem</PaymentSubtitle>
+  //           <ContainerOptions>
+  //             <ChoiceBox
+  //               description={'Sem Hotel'}
+  //               price={0}
+  //               selectState={hotelSelector === '' ? false : hotelSelector}
+  //               selector={setHotelSelector}
+  //               setPrice={setHotelPrice}
+  //               disable={!isRemoteTicket}
+  //             />
+  //             <ChoiceBox
+  //               description={'Com Hotel'}
+  //               price={350}
+  //               selectState={hotelSelector === '' ? false : !hotelSelector}
+  //               selector={setHotelSelector}
+  //               setPrice={setHotelPrice}
+  //               disable={!isRemoteTicket}
+  //             />
+  //           </ContainerOptions>
+  //           {/* IF HOTELPRICE IS DIFFERENT FROM ZERO, WILL APPEAR RESERVATION BUTTOM */}
+  //           {
+  //             hotelPrice !== 1 || (hotelPrice === 1 && !isRemoteTicket) ? (
+  //               <>
+  //                 <PaymentSubtitle>Fechado! O total ficou em R$ { ticket.price }. Agora é só confirmar:</PaymentSubtitle>
+  //                 <BookingButton onClick={() => submitTicket(ticket)}>RESERVAR INGRESSO</BookingButton> 
+  //               </>
+  //             ) : null
+  //           }
+  //         </>
+  //       )
+  //     }
+  //   </>
+  // );
+
   return (
-    <>
-      <PaymentTitle>Ingresso e pagamento</PaymentTitle>
-      <PaymentSubtitle>Primeiro, escolha sua modalidade de ingresso</PaymentSubtitle>
-      <ContainerOptions>
-        <ChoiceBox
-          description={'Presencial'}
-          price={250}
-          selectState={isRemoteTicket === '' ? false : isRemoteTicket}
-          selector={setIsRemoteTicket}
-          setPrice={setTicketPrice}
-          disable={false}
-        />
-        <ChoiceBox
-          description={'Online'}
-          price={100}
-          selectState={isRemoteTicket === '' ? false : !isRemoteTicket}
-          selector={setIsRemoteTicket}
-          setPrice={setTicketPrice}
-          disable={false}
-        />
-      </ContainerOptions>
-      {/* IF TICKETPRICE IS DIFFERENT FROM ZERO, WILL APPEAR THE NEXT OPTIONS */}
-      {
-        ticketPrice !== 0 && (
-          <>
-            <PaymentSubtitle>Ótimo! Agora escolha sua modalidade de hospedagem</PaymentSubtitle>
-            <ContainerOptions>
-              <ChoiceBox
-                description={'Sem Hotel'}
-                price={0}
-                selectState={hotelSelector === '' ? false : hotelSelector}
-                selector={setHotelSelector}
-                setPrice={setHotelPrice}
-                disable={!isRemoteTicket}
-              />
-              <ChoiceBox
-                description={'Com Hotel'}
-                price={350}
-                selectState={hotelSelector === '' ? false : !hotelSelector}
-                selector={setHotelSelector}
-                setPrice={setHotelPrice}
-                disable={!isRemoteTicket}
-              />
-            </ContainerOptions>
-            {/* IF HOTELPRICE IS DIFFERENT FROM ZERO, WILL APPEAR RESERVATION BUTTOM */}
-            {
-              hotelPrice !== 1 || (hotelPrice === 1 && !isRemoteTicket) ? (
-                <>
-                  <PaymentSubtitle>Fechado! O total ficou em R$ { ticket.price }. Agora é só confirmar:</PaymentSubtitle>
-                  <BookingButton onClick={() => submitTicket(ticket)}>RESERVAR INGRESSO</BookingButton> 
-                </>
-              ) : null
-            }
-          </>
-        )
-      }
-    </>
+    <CardScream />
   );
 }
 
 //STYLES
 const ContainerOptions = styled.div`
-  display: flex;import useEnrollment from '../../../hooks/api/useEnrollment';
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -170,7 +175,7 @@ const TextSubscription = styled.p`
   line-height: 23px;
   text-align: center;
   color: #8E8E8E;
-}`;
+`;
 
 const LoaderStyle = styled(Loader)`
   position: relative;
