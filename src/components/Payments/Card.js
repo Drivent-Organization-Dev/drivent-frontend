@@ -30,7 +30,7 @@ export default function Card() {
         name={cardInformations.name}
         number={cardInformations.number}
       />
-      <form>
+      <FormsCard>
         <input
           type="tel"
           name="number"
@@ -38,7 +38,7 @@ export default function Card() {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
         />
-      </form>
+      </FormsCard>
     </CardContainer>
   );
 }
