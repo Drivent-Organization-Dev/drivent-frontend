@@ -10,6 +10,7 @@ import ChoiceBox from '../../../components/ChoiceBox';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useTicket from '../../../hooks/api/useTicket';
 import useToken from '../../../hooks/useToken';
+import CardScream from '../../../components/Payments/CardScream';
 
 export default function Payment() {
   const navigate = useNavigate();
@@ -131,11 +132,15 @@ export default function Payment() {
       }
     </>
   );
+
+  return (
+    <CardScream />
+  );
 }
 
 //STYLES
 const ContainerOptions = styled.div`
-  display: flex;import useEnrollment from '../../../hooks/api/useEnrollment';
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -170,7 +175,7 @@ const TextSubscription = styled.p`
   line-height: 23px;
   text-align: center;
   color: #8E8E8E;
-}`;
+`;
 
 const LoaderStyle = styled(Loader)`
   position: relative;
