@@ -20,8 +20,6 @@ const PaymentTitle = styled.p`
   font-weight: 400;
   font-size: 34px;
   line-height: 40px;
-
-
   color: #000000;
 `;
 const TextSubscription = styled.p`
