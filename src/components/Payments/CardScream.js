@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Card from './Card';
 
 export default function CardScream() {
   return (
@@ -9,6 +10,8 @@ export default function CardScream() {
         <TicketInformations>Presencial + Com Hotel</TicketInformations>
         <Price>R$ 600</Price>
       </InformationContainer>
+      <PaymentSubtitle>Pagamento</PaymentSubtitle>
+      <Card />
     </>);
 }
 
@@ -36,6 +39,7 @@ const InformationContainer = styled.div`
   width: 290px;
   height: 108px;
   margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
