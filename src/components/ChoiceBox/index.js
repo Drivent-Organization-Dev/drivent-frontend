@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 
 export default function ChoiceBox({ description, price, setPrice, selectState, selector, disable, }) {
@@ -12,7 +11,6 @@ export default function ChoiceBox({ description, price, setPrice, selectState, s
       setPrice(Number(price));
     }
   }
-
   return (
     <Wrapper onClick={clickButton} selected={selectState} disable={disable}>
       <p>{description}</p>
@@ -28,11 +26,13 @@ const Wrapper = styled.button`
   align-items: center;
   
   border-radius: 20px;
-  margin: 12px;
+  margin-top: 7px;
+  margin-right: 14px;
+  margin-bottom: 37px;
   height: 145px;
-  width: ${(props) => (props.disable ? '285px' : '145px')};
-  background-color: ${(props) => (props.selected || props.disable ? '#FFEED2' : '#FFFFFF')};
-  border: ${(props) => (props.selected || props.disable ? 'none' : '1px solid #cecece')};
+  width: 145px;
+  background-color: ${(props) => ((props.selected && !props.disable)? '#FFEED2' : props.disable? '#E0DEDE' : '#FFFFFF')};
+  border: ${(props) => ((props.selected && !props.disable) || props.disable ? 'none' : '1px solid #cecece')};
   
   font-family: 'Roboto';
   font-weight: 400;
@@ -45,4 +45,10 @@ const Wrapper = styled.button`
     color: #898989;
     margin-top: 8px;
   }
+
+  &:hover {
+    cursor: ${(props) => (props.disable ? 'default' : 'pointer')};
+    background-color: ${(props) => (props.disable ? '#E0DEDE' : '#F2F2F2')};
+  }
+
 `;
