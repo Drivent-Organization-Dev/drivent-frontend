@@ -20,7 +20,7 @@ export default function Payment() {
   const { paymentLoading, payment, enrollmentLoading, enrollment } = usePayment();
 
   //POST TICKET AND TICKET TYPE
-  const [ticket, setTicket] = useState({ isRemote: false, includesHotel: false, price: 0 });
+  const [ticket, setTicket] = useState({ isRemote: false, includesHotel: false, price: 0,  });
   const { postTicketType } = useTicketType();
   const { postTicket } = useTicket();
 
@@ -30,6 +30,7 @@ export default function Payment() {
   const [isRemoteTicket, setIsRemoteTicket] = useState(''); // TRUE IF REMOTE TICKET IS SELECTED
   const [hotelSelector, setHotelSelector] = useState(''); // TRUE IF TICKET WITH HOTEL IS SELECTED
   const [ticketPrice, setTicketPrice] = useState(0); // PRICE OF TICKET (REMOTE OR PRESENTIAL)
+  const [ticketStatus, setTicketStatus] = useState(''); // STATUS OF TICKET (REMOTE OR PRESENTIAL)
   const [hotelPrice, setHotelPrice] = useState(1); // PRICE OF HOTEL TICKET (WITH OR WITHOUT HOTEL)
 
   //UPDATE STATES WHEN API DATA CHANGES
@@ -37,9 +38,9 @@ export default function Payment() {
   useEffect(() => { if (enrollment) { setEnrollmentApiData(enrollment); } }, [enrollment]);
   useEffect(() => {
     setTicket({
-      isRemote: isRemoteTicket,
+      isRemote: !isRemoteTicket,
       includesHotel: hotelSelector === '' || isRemoteTicket === true ? false : !hotelSelector, // IF REMOTE TICKET IS SELECTED, ITS NOT POSSIBLE TO SELECT HOTEL TICKET
-      price: isRemoteTicket ? Number(ticketPrice) + Number(hotelPrice) : Number(ticketPrice), // IF REMOTE TICKET IS SELECTED, HOTEL PRICE IS NOT ADDED
+      price: !isRemoteTicket ? Number(ticketPrice) + Number(hotelPrice) : Number(ticketPrice), // IF REMOTE TICKET IS SELECTED, HOTEL PRICE IS NOT ADDED
     });
   }, [isRemoteTicket, hotelSelector, ticketPrice, hotelPrice]);
 
