@@ -30,7 +30,6 @@ export default function Payment() {
   const [isRemoteTicket, setIsRemoteTicket] = useState(''); // TRUE IF REMOTE TICKET IS SELECTED
   const [hotelSelector, setHotelSelector] = useState(''); // TRUE IF TICKET WITH HOTEL IS SELECTED
   const [ticketPrice, setTicketPrice] = useState(0); // PRICE OF TICKET (REMOTE OR PRESENTIAL)
-  const [ticketStatus, setTicketStatus] = useState(''); // STATUS OF TICKET (REMOTE OR PRESENTIAL)
   const [hotelPrice, setHotelPrice] = useState(1); // PRICE OF HOTEL TICKET (WITH OR WITHOUT HOTEL)
 
   //UPDATE STATES WHEN API DATA CHANGES
@@ -39,10 +38,12 @@ export default function Payment() {
   useEffect(() => {
     setTicket({
       isRemote: !isRemoteTicket,
-      includesHotel: hotelSelector === '' || isRemoteTicket === true ? false : !hotelSelector, // IF REMOTE TICKET IS SELECTED, ITS NOT POSSIBLE TO SELECT HOTEL TICKET
-      price: !isRemoteTicket ? Number(ticketPrice) + Number(hotelPrice) : Number(ticketPrice), // IF REMOTE TICKET IS SELECTED, HOTEL PRICE IS NOT ADDED
+      includesHotel: hotelSelector === '' || isRemoteTicket === false ? true : !hotelSelector, // IF REMOTE TICKET IS SELECTED, ITS NOT POSSIBLE TO SELECT HOTEL TICKET
+      price: !isRemoteTicket ? Number(ticketPrice) : Number(ticketPrice) + Number(hotelPrice), // IF REMOTE TICKET IS SELECTED, HOTEL PRICE IS NOT ADDED
     });
   }, [isRemoteTicket, hotelSelector, ticketPrice, hotelPrice]);
+
+  console.log('ticket', ticket);
 
   //SUBMIT TICKET WHEN CLICK ON BUTTON
   async function submitTicket(ticket) {
@@ -51,6 +52,7 @@ export default function Payment() {
       await postTicket({ ticketTypeId: postedTicketType.id }, token);
       navigate(0);
     } catch (error) {
+      console.log('ERROOO:   ', error);
       toast('Não foi possivel reservar seu ingresso!');
     }
   }
@@ -134,9 +136,9 @@ export default function Payment() {
     </>
   );
 
-  return (
-    <CardScream />
-  );
+  // return (
+  //   <CardScream />
+  // );
 }
 
 //STYLES

@@ -15,6 +15,7 @@ export async function getTickets(token) {
 }
 
 export async function createTicket(body, token) {
+  console.log('CREATETICKET: ', body);
   const response = await api.post('/tickets', body, {
     headers: { Authorization: `Bearer ${token}`, },
   });
