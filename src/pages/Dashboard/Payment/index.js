@@ -135,7 +135,7 @@ export default function Payment() {
 
 //STYLES
 const ContainerOptions = styled.div`
-  display: flex;import useEnrollment from '../../../hooks/api/useEnrollment';
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -170,7 +170,7 @@ const TextSubscription = styled.p`
   line-height: 23px;
   text-align: center;
   color: #8E8E8E;
-}`;
+`;
 
 const LoaderStyle = styled(Loader)`
   position: relative;
