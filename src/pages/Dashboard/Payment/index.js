@@ -19,6 +19,8 @@ export default function Payment() {
   //HOOKS FOR PAYMENT AND ENROLLMENT
   const { paymentLoading, payment, enrollmentLoading, enrollment } = usePayment();
 
+  console.log(payment);
+
   //POST TICKET AND TICKET TYPE
   const [ticket, setTicket] = useState({ isRemote: false, includesHotel: false, price: 0,  });
   const { postTicketType } = useTicketType();
@@ -138,7 +140,8 @@ export default function Payment() {
   }
   else {
     return (
-      <CardScream />
+      <CardScream status={payment.status} price={payment.TicketType.price} 
+        isRemote={payment.TicketType.isRemote} hotel={payment.TicketType.includesHotel}/>
     );
   }
 }

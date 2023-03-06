@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import Card from './Card';
+import PaymentSucessful from './PaymentSucessful';
 
-export default function CardScream() {
+export default function CardScream({ status, price, isRemote, hotel }) {
   return (
     <>
       <PaymentTitle>Ingresso e Pagamento</PaymentTitle>
       <PaymentSubtitle>Ingresso Escolhido</PaymentSubtitle>
       <InformationContainer>
-        <TicketInformations>Presencial + Com Hotel</TicketInformations>
-        <Price>R$ 600</Price>
+        <TicketInformations>{isRemote? 'Remoto' : 'Presencial'} + {hotel? 'Com Hotel' : 'Sem Hotel'}</TicketInformations>
+        <Price>R$ {price}</Price>
       </InformationContainer>
       <PaymentSubtitle>Pagamento</PaymentSubtitle>
-      <Card />
+      {status === 'RESERVED'? <Card /> : <PaymentSucessful />}  
     </>);
 }
 
