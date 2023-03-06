@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Card from './Card';
 import PaymentSucessful from './PaymentSucessful';
 
-export default function CardScreen({ status, price, isRemote, hotel }) {
+export default function CardScreen({ status, price, isRemote, hotel, ticketId }) {
   return (
     <>
       <PaymentTitle>Ingresso e Pagamento</PaymentTitle>
@@ -12,7 +12,7 @@ export default function CardScreen({ status, price, isRemote, hotel }) {
         <Price>R$ {price}</Price>
       </InformationContainer>
       <PaymentSubtitle>Pagamento</PaymentSubtitle>
-      {status === 'RESERVED'? <Card /> : <PaymentSucessful />}  
+      {status === 'RESERVED'? <Card ticketId={ticketId}/> : <PaymentSucessful />}  
     </>);
 }
 

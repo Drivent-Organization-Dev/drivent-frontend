@@ -2,8 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
+import useSavePayment from '../../hooks/api/useSavePayment';
 
-export default function Card() {
+export default function Card({ ticketId }) {
+  const { savePayment } = useSavePayment();
   const [cardInformations, setCardInformations] = useState({
     cvc: '',
     expiry: '',
@@ -12,6 +14,7 @@ export default function Card() {
     number: '',
   });
 
+  console.log(cardInformations.number);
   function handleInputFocus(e) {
     setCardInformations({ ...cardInformations, focus: e.target.name });
   };
@@ -23,9 +26,33 @@ export default function Card() {
 
   console.log(cardInformations);
 
+  async function sendPayment(e) {
+    e.preventDefault();
+    let issuer = 'Other';
+    if (cardInformations.number[0] === '4') {
+      issuer = 'Visa';
+    } else if (cardInformations.number[0] === '5') {
+      issuer = 'Mastercard';
+    }
+
+    const body = {
+      ticketId,
+      cardData: {
+        issuer: issuer,
+        number: Number(cardInformations.number),
+        name: cardInformations.name,
+        expirationDate: cardInformations.expiry,
+        cvv: Number(cardInformations.cvc)
+      }
+    };
+    console.log(body);
+
+    await savePayment(body);
+  }
+
   return (
     <>
-      <form>
+      <form onSubmit={sendPayment}>
         <PaymentContainer>
           <CardContainer>
             <Cards
@@ -46,7 +73,7 @@ export default function Card() {
             />
             <p>E.g.: 49..., 51..., 36..., 37...</p>
             <NameInput
-              type="tel"
+              type="text"
               name="name"
               placeholder="Name"
               onChange={handleInputChange}
@@ -61,8 +88,8 @@ export default function Card() {
                 onFocus={handleInputFocus}
               />
               <CVCInput
-                type="tel"
-                name="CVC"
+                type="text"
+                name="cvc"
                 placeholder="CVC"
                 onChange={handleInputChange}
                 onFocus={handleInputFocus}
@@ -134,7 +161,7 @@ const CVCInput = styled.input`
 
 const SubmitPayment = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   left: 0;
   button {
     width: 182px;

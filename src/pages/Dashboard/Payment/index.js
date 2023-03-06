@@ -19,7 +19,7 @@ export default function Payment() {
   //HOOKS FOR PAYMENT AND ENROLLMENT
   const { paymentLoading, payment, enrollmentLoading, enrollment } = usePayment();
 
-  console.log(payment);
+  console.log('payment', payment);
 
   //POST TICKET AND TICKET TYPE
   const [ticket, setTicket] = useState({ isRemote: false, includesHotel: false, price: 0,  });
@@ -141,7 +141,8 @@ export default function Payment() {
   else {
     return (
       <CardScreen status={payment.status} price={payment.TicketType.price} 
-        isRemote={payment.TicketType.isRemote} hotel={payment.TicketType.includesHotel}/>
+        isRemote={payment.TicketType.isRemote} hotel={payment.TicketType.includesHotel} 
+        ticketId={payment.id}/>
     );
   }
 }
