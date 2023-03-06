@@ -22,14 +22,16 @@ export default function Card() {
   };
 
   return (
-    <CardContainer>
-      <Cards
-        cvc={cardInformations.cvc}
-        expiry={cardInformations.expiry}
-        focused={cardInformations.focus}
-        name={cardInformations.name}
-        number={cardInformations.number}
-      />
+    <PaymentContainer>
+      <CardContainer>
+        <Cards
+          cvc={cardInformations.cvc}
+          expiry={cardInformations.expiry}
+          focused={cardInformations.focus}
+          name={cardInformations.name}
+          number={cardInformations.number}
+        />
+      </CardContainer>
       <FormsCard>
         <input
           type="tel"
@@ -38,16 +40,39 @@ export default function Card() {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
         />
+        <input
+          type="tel"
+          name="name"
+          placeholder="Name"
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+        />
+        <input
+          type="tel"
+          name="expiry"
+          placeholder="Valid Thru"
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+        />
       </FormsCard>
-    </CardContainer>
+    </PaymentContainer>
   );
 }
 
-const CardContainer = styled.div`
+const PaymentContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: greenyellow;
     margin-top: 30px;
+`;
+
+const CardContainer = styled.div`
+  width: 300px;
+  display: flex;
+  left: 0;
+`;
+
+const FormsCard = styled.div`
+  width: 100px;
+  display: flex;
+  flex-direction: column;
 `;
 
