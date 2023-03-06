@@ -9,3 +9,4 @@ export async function sendPayment(body, token) {
 
   return response.data;
 }
+
