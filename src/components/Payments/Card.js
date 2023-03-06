@@ -23,6 +23,10 @@ export default function Card() {
 
   console.log(cardInformations);
 
+  function sendPayment(e) {
+    e.prevent.default();
+  }
+
   return (
     <>
       <form>
@@ -46,7 +50,7 @@ export default function Card() {
             />
             <p>E.g.: 49..., 51..., 36..., 37...</p>
             <NameInput
-              type="tel"
+              type="text"
               name="name"
               placeholder="Name"
               onChange={handleInputChange}
@@ -61,7 +65,7 @@ export default function Card() {
                 onFocus={handleInputFocus}
               />
               <CVCInput
-                type="tel"
+                type="text"
                 name="CVC"
                 placeholder="CVC"
                 onChange={handleInputChange}
@@ -134,7 +138,7 @@ const CVCInput = styled.input`
 
 const SubmitPayment = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   left: 0;
   button {
     width: 182px;
