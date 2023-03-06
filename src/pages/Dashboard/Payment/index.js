@@ -10,7 +10,7 @@ import ChoiceBox from '../../../components/ChoiceBox';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useTicket from '../../../hooks/api/useTicket';
 import useToken from '../../../hooks/useToken';
-import CardScream from '../../../components/Payments/CardScream';
+import CardScreen from '../../../components/Payments/CardScreen';
 
 export default function Payment() {
   const navigate = useNavigate();
@@ -140,7 +140,7 @@ export default function Payment() {
   }
   else {
     return (
-      <CardScream status={payment.status} price={payment.TicketType.price} 
+      <CardScreen status={payment.status} price={payment.TicketType.price} 
         isRemote={payment.TicketType.isRemote} hotel={payment.TicketType.includesHotel}/>
     );
   }

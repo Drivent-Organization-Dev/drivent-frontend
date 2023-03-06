@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Card from './Card';
 import PaymentSucessful from './PaymentSucessful';
 
-export default function CardScream({ status, price, isRemote, hotel }) {
+export default function CardScreen({ status, price, isRemote, hotel }) {
   return (
     <>
       <PaymentTitle>Ingresso e Pagamento</PaymentTitle>
