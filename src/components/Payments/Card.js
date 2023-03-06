@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import useSavePayment from '../../hooks/api/useSavePayment';
+import useToken from '../../hooks/useToken';
 
-export default function Card({ ticketId }) {
+export default function Card({ ticketId, setReload }) {
   const { savePayment } = useSavePayment();
+  const  token  = useToken();
   const [cardInformations, setCardInformations] = useState({
     cvc: '',
     expiry: '',
@@ -46,8 +48,14 @@ export default function Card({ ticketId }) {
       }
     };
     console.log(body);
-
-    await savePayment(body);
+    try{
+      await savePayment(body, token);
+      //window.location.reload(false);
+      setReload('PAID');
+    }
+    catch(err) {
+      console.log(err);
+    }
   }
 
   return (
