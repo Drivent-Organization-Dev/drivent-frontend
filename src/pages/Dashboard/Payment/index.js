@@ -54,7 +54,6 @@ export default function Payment() {
       toast('Não foi possivel reservar seu ingresso!');
     }
   }
-
   // WHEN USER IS NOT ENROLLED OR LOGGED IN
   while (enrollment === '' || enrollment === undefined || enrollment === null) {
     return (
@@ -74,7 +73,7 @@ export default function Payment() {
     );
   }
   
-  if (ticket === undefined || ticket === null || ticket === '') {
+  if (payment === undefined || payment === null || payment === '' ) {
     return (
       <>
         <PaymentTitle>Ingresso e pagamento</PaymentTitle>
