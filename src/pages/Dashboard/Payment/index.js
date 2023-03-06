@@ -134,9 +134,9 @@ export default function Payment() {
       </>
     );
   }
-  else {
+  else if (payment.status) {
     return (
-      <CardScream />
+      <CardScream staus={payment.status}/>
     );
   }
 }
