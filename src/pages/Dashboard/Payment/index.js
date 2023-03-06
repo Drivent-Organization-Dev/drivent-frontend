@@ -10,7 +10,7 @@ import ChoiceBox from '../../../components/ChoiceBox';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useTicket from '../../../hooks/api/useTicket';
 import useToken from '../../../hooks/useToken';
-import CardScream from '../../../components/Payments/CardScream';
+import CardScreen from '../../../components/Payments/CardScreen';
 
 export default function Payment() {
   const navigate = useNavigate();
@@ -18,6 +18,8 @@ export default function Payment() {
 
   //HOOKS FOR PAYMENT AND ENROLLMENT
   const { paymentLoading, payment, enrollmentLoading, enrollment } = usePayment();
+
+  console.log(payment);
 
   //POST TICKET AND TICKET TYPE
   const [ticket, setTicket] = useState({ isRemote: false, includesHotel: false, price: 0,  });
@@ -46,7 +48,9 @@ export default function Payment() {
   //SUBMIT TICKET WHEN CLICK ON BUTTON
   async function submitTicket(ticket) {
     try {
+      console.log(ticket);
       const postedTicketType = await postTicketType(ticket, token);
+      console.log(postedTicketType);
       await postTicket({ ticketTypeId: postedTicketType.id }, token);
       navigate(0);
     } catch (error) {
@@ -65,7 +69,7 @@ export default function Payment() {
   }
 
   // WHILE ENROLLMENT AND PAYMENT ARE LOADING, RENDER SPINNER
-  while (paymentLoading || enrollmentLoading) {
+  if (paymentLoading || enrollmentLoading) {
     return (
       <>
         <span>{<LoaderStyle color="#000000" height={26} width={26} type="Oval" />} Carregando</span>
@@ -136,7 +140,8 @@ export default function Payment() {
   }
   else {
     return (
-      <CardScream />
+      <CardScreen status={payment.status} price={payment.TicketType.price} 
+        isRemote={payment.TicketType.isRemote} hotel={payment.TicketType.includesHotel}/>
     );
   }
 }

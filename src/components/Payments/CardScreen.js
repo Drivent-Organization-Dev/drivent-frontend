@@ -1,14 +1,18 @@
 import styled from 'styled-components';
+import Card from './Card';
+import PaymentSucessful from './PaymentSucessful';
 
-export default function CardScream() {
+export default function CardScreen({ status, price, isRemote, hotel }) {
   return (
     <>
       <PaymentTitle>Ingresso e Pagamento</PaymentTitle>
       <PaymentSubtitle>Ingresso Escolhido</PaymentSubtitle>
       <InformationContainer>
-        <TicketInformations>Presencial + Com Hotel</TicketInformations>
-        <Price>R$ 600</Price>
+        <TicketInformations>{isRemote? 'Remoto' : 'Presencial'} + {hotel? 'Com Hotel' : 'Sem Hotel'}</TicketInformations>
+        <Price>R$ {price}</Price>
       </InformationContainer>
+      <PaymentSubtitle>Pagamento</PaymentSubtitle>
+      {status === 'RESERVED'? <Card /> : <PaymentSucessful />}  
     </>);
 }
 
@@ -36,6 +40,7 @@ const InformationContainer = styled.div`
   width: 290px;
   height: 108px;
   margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
