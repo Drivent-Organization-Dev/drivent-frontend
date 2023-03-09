@@ -48,7 +48,7 @@ const Wrapper = styled.button`
 
   &:hover {
     cursor: ${(props) => (props.disable ? 'default' : 'pointer')};
-    background-color: ${(props) => (props.disable ? '#E0DEDE' : '#F2F2F2')};
+    background-color: ${(props) => (props.disable ? '#E0DEDE' : '#FFEED2')};
   }
 
 `;
