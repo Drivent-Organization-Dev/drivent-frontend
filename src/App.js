@@ -12,7 +12,7 @@ import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import FillSubscription from './pages/Dashboard/FillSubscription';
 import Payment from './pages/Dashboard/Payment';
-import Hotel from './pages/Dashboard/Hotel';
+import Hotel from './pages/Dashboard/Booking';
 import Activities from './pages/Dashboard/Activities';
 import Certificate from './pages/Dashboard/Certificate';
 
