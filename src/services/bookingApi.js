@@ -6,3 +6,10 @@ export async function sendBooking(token, body) {
   });
   return response.data;
 }
+
+export async function getBooking(token, body) {
+  const response = await api.get('/booking', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return response.data;
+}

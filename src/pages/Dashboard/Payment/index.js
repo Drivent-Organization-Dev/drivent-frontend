@@ -138,7 +138,7 @@ export default function Payment() {
       </>
     );
   }
-  else {
+  else if (payment.status) {
     return (
       <CardScreen status={payment.status} price={payment.TicketType.price} 
         isRemote={payment.TicketType.isRemote} hotel={payment.TicketType.includesHotel} 
