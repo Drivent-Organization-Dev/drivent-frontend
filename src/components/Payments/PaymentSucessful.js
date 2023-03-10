@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export default function PaymentSucessful() {
   return(
     <StyledPaymentSucessful>
-      <h5>Pagamento</h5>
       <div>
         <AiFillCheckCircle color="green" size={50}></AiFillCheckCircle>
         <div>
@@ -26,15 +25,6 @@ flex-direction:column;
     >div{
         margin-left:13px;
     }
-}
-h5{
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 23px;
-
-color: #8E8E8E;
 }
 h6{
     font-family: 'Roboto';
