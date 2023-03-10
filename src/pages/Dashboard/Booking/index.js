@@ -1,7 +1,9 @@
-import BookingOptions from '../../../components/Booking/BookingOptions';
+import { BookingPage } from '../../../components/Booking';
 
 export default function Hotel() {
   return (
-    <BookingOptions/>
+    <>
+      <BookingPage></BookingPage>
+    </>
   );
 };

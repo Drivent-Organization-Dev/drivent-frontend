@@ -122,7 +122,7 @@ const RoomOptions = styled.div`
   margin-bottom: 30px;
 `;
 
-const Title = styled.p`
+export const Title = styled.p`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -132,7 +132,7 @@ const Title = styled.p`
   color: #000000;
 `;
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -161,7 +161,7 @@ const RoomCard = styled.div`
   }
 `;
 
-const HotelCard = styled.div`
+export const HotelCard = styled.div`
   font-family: 'Roboto';
   display: flex;
   flex-direction: column;
@@ -184,7 +184,7 @@ const HotelCard = styled.div`
   }
   span {
     font-size: 12px;
-    margin-top: 15px;
+    margin-top: 10px;
   }
   :hover {
     background-color: ${props => (props.selectHotelButton === props.hotel) ? '#FFEED2' : '#CCCCCC'};
@@ -192,7 +192,7 @@ const HotelCard = styled.div`
   }
 `;
 
-const BookingButton = styled.button`
+export const BookingButton = styled.button`
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 14px;
