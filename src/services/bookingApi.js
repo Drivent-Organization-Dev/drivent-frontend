@@ -7,9 +7,16 @@ export async function sendBooking(token, body) {
   return response.data;
 }
 
+export async function listBookedRooms(token, hotelId) {
+  const response = await api.get(`/booking/${hotelId}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  console.log(response.data);
+
 export async function getBooking(token, body) {
   const response = await api.get('/booking', {
     headers: { Authorization: `Bearer ${token}` }
   });
+
   return response.data;
 }

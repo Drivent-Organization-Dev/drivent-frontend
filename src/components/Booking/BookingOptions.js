@@ -5,8 +5,10 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { getTickets } from '../../services/ticketApi';
 import { getHotels, getRooms } from '../../services/hotelsApi';
-import { sendBooking } from '../../services/bookingApi';
+import { sendBooking, listBookedRooms } from '../../services/bookingApi';
 import useToken from '../../hooks/useToken';
+import HotelCard from './HotelCard';
+import RoomCard from './RoomCard';
 
 export default function BookingOptions() {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ export default function BookingOptions() {
   const [ticket, setTicket] = useState();
   const [selectHotelButton, setSelectHotelButton] = useState();
   const [selectRoomButton, setSelectRoomButton] = useState();
+  const [bookedRooms, setBookedRooms] = useState();
 
   useEffect(() => {
     getTickets(token)
@@ -44,12 +47,6 @@ export default function BookingOptions() {
       de fazer a escolha de hospedagem</>);
   }
 
-  function getRoomsByHotelId(token, hotelId) {
-    getRooms(token, hotelId)
-      .then(ans => setRooms(ans.Rooms))
-      .catch(ans => console.log(ans));
-  }
-
   function bookRoom(token, roomId) {
     sendBooking(token, { roomId: roomId })
       .then(ans => toast('Quarto reservado com sucesso'))
@@ -61,17 +58,20 @@ export default function BookingOptions() {
       <Title>Escolha de hotel e quarto</Title>
       <Subtitle>Primeiro escolha seu hotel!</Subtitle>
       <HotelOptions>
-        {hotels.map((hotel) => (
-          <HotelCard selectHotelButton={selectHotelButton} hotel={hotel.id} key={hotel.id} onClick={() => {
-            setSelectRoom();
-            setSelectRoomButton();
-            getRoomsByHotelId(token, hotel.id);
-            setSelectHotelButton(hotel.id);
-          }}>
-            <img src={hotel.image} />
-            <p>{hotel.name}</p>
-            <span><strong>Tipos de acomodação:</strong></span>
-            <span>vagas </span>
+        {hotels.map((hotel, i, arr) => (
+          <HotelCard 
+            key={hotel.id}
+            hotelId={hotel.id}
+            token={token}
+            setSelectRoom={setSelectRoom}
+            setSelectRoomButton={setSelectRoomButton}
+            selectHotelButton={selectHotelButton}
+            setSelectHotelButton={setSelectHotelButton}
+            setBookedRooms={setBookedRooms}
+            setRooms={setRooms}
+            bookedRooms={bookedRooms}
+            hotelImg={hotel.image}
+            hotelName={hotel.name}>
           </HotelCard>)
         )}
       </HotelOptions>
@@ -81,24 +81,17 @@ export default function BookingOptions() {
           <RoomOptions>
             {(rooms) && (
               rooms.map(room => (
-                <RoomCard selectRoomButton={selectRoomButton} room={room.id} key={room.id} onClick={() => {
-                  setSelectRoomButton(room.id);
-                  setSelectRoom(room.id);
-                }}>
-                  <div>{room.name}</div>
-                  {(room.capacity === 1) && (<ion-icon name="person-outline"></ion-icon>)}
-                  {(room.capacity === 2) && <span>
-                    <ion-icon name="person-outline"></ion-icon>
-                    <ion-icon name="person-outline"></ion-icon>
-                  </span>
-                  }
-                  {(room.capacity === 3) && <span>
-                    <ion-icon name="person-outline"></ion-icon>
-                    <ion-icon name="person-outline"></ion-icon>
-                    <ion-icon name="person-outline"></ion-icon>
-                  </span>}
-
-                </RoomCard>
+                <RoomCard
+                  key={room.id}
+                  roomId={room.id} 
+                  roomName={room.name}
+                  roomCapacity={room.capacity}
+                  bookedRooms={bookedRooms}
+                  selectRoomButton={selectRoomButton} 
+                  setSelectRoomButton={setSelectRoomButton}
+                  setSelectRoom={setSelectRoom}
+                  selectRomm={selectRomm}
+                />
               ))
             )}
           </RoomOptions>
@@ -141,6 +134,7 @@ export const Subtitle = styled.p`
   color: #8E8E8E;
   margin-bottom: 10px;
 `;
+
 
 const RoomCard = styled.div`
   font-family: 'Roboto';
