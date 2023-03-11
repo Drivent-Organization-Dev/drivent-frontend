@@ -59,7 +59,7 @@ export default function HotelCard({ token, hotelId, hotelName, hotelImg, setRoom
   );
 }
 
-const Hotel = styled.div`
+export const Hotel = styled.div`
   font-family: 'Roboto';
   display: flex;
   flex-direction: column;

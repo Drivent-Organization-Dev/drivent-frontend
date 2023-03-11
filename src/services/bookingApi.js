@@ -12,6 +12,7 @@ export async function listBookedRooms(token, hotelId) {
     headers: { Authorization: `Bearer ${token}` }
   });
   console.log(response.data);
+}
 
 export async function getBooking(token, body) {
   const response = await api.get('/booking', {
