@@ -115,7 +115,7 @@ const RoomOptions = styled.div`
   margin-bottom: 30px;
 `;
 
-const Title = styled.p`
+export const Title = styled.p`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -125,7 +125,7 @@ const Title = styled.p`
   color: #000000;
 `;
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -135,7 +135,58 @@ const Subtitle = styled.p`
   margin-bottom: 10px;
 `;
 
-const BookingButton = styled.button`
+
+const RoomCard = styled.div`
+  font-family: 'Roboto';
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 190px;
+  height: 45px;
+  border: solid 1px #CECECE;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 20px;
+  background-color: ${props => (props.selectRoomButton === props.room) ? '#FFEED2' : 'none'};
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const HotelCard = styled.div`
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  height: 264px;
+  width: 196px;
+  border-radius: 10px;
+  background-color: ${props => (props.selectHotelButton === props.hotel) ? '#FFEED2' : '#EBEBEB'};
+  padding: 16px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  img {
+    width: 168px;
+    height: 109px;
+    border-radius: 5px;
+  }
+  p {
+    margin-top: 10px;
+    font-family: 'Roboto';
+    font-size: 20px;
+  }
+  span {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  :hover {
+    background-color: ${props => (props.selectHotelButton === props.hotel) ? '#FFEED2' : '#CCCCCC'};
+    cursor: pointer;
+  }
+`;
+
+export const BookingButton = styled.button`
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 14px;
