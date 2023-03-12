@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export default function RoomCard({ roomId, roomName, roomCapacity, bookedRooms, setSelectRoom, selectRoomButton, setSelectRoomButton }) {
   const icons = [];
   let disable = false;
-  console.log(bookedRooms);
   for(let i=0; i<bookedRooms.length; i++) {
     if (bookedRooms[i].roomId === roomId) {
       icons.push (<ion-icon name="person"></ion-icon>);
