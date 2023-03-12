@@ -8,19 +8,18 @@ export function BookingPage() {
   const token = useToken();
   console.log(booking);
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     getBooking(token)
       .then((r) => setBooking(r))
       .catch((e) => console.log(e));
   }, []
   );
-  if(booking)return(
+  if (booking) return (
     <>
       <CurrentBooking booking={booking}></CurrentBooking>
     </>
   );
-  return(
+  return (
     <>
       <BookingOptions></BookingOptions>
     </>

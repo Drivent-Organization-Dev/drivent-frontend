@@ -12,7 +12,6 @@ export default function HotelCard({ token, hotelId, hotelName, hotelImg, setRoom
     listBookedRooms(token, hotelId)
       .then(ans => {
         setTotalBookedRooms((ans.length));
-        setBookedRooms(ans);
       })
       .catch(ans => console.log(ans));
   }, []);
@@ -23,6 +22,7 @@ export default function HotelCard({ token, hotelId, hotelName, hotelImg, setRoom
         for(let i=0; i<ans.Rooms.length; i++) {
           vacanciesSum += ans.Rooms[i].capacity;
         }
+        console.log(vacanciesSum);
         setVacancies(vacanciesSum);
       })
       .catch(ans => console.log(ans));
