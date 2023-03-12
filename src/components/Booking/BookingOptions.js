@@ -49,7 +49,7 @@ export default function BookingOptions() {
 
   function bookRoom(token, roomId) {
     sendBooking(token, { roomId: roomId })
-      .then(ans => toast('Quarto reservado com sucesso'))
+      .then(ans => toast('Quarto reservado com sucesso!'))
       .catch(ans => toast('Não foi possível fazer a reserva!'));
   }
 

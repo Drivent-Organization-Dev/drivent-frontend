@@ -15,11 +15,11 @@ export function BookingPage() {
       .catch((e) => console.log(e));
   }, []
   );
-  if(booking)return(
+  /*   if(booking)return(
     <>
       <CurrentBooking booking={booking}></CurrentBooking>
     </>
-  );
+  ); */
   return(
     <>
       <BookingOptions></BookingOptions>
