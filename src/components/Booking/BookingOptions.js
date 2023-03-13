@@ -5,12 +5,12 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { getTickets } from '../../services/ticketApi';
 import { getHotels, getRooms } from '../../services/hotelsApi';
-import { sendBooking, listBookedRooms } from '../../services/bookingApi';
+import { sendBooking, listBookedRooms, updateBooking } from '../../services/bookingApi';
 import useToken from '../../hooks/useToken';
 import HotelCard from './HotelCard';
 import RoomCard from './RoomCard';
 
-export default function BookingOptions() {
+export default function BookingOptions({ changeRoom, booking }) {
   const navigate = useNavigate();
   const token = useToken();
   const [hotels, setHotels] = useState();
@@ -20,7 +20,8 @@ export default function BookingOptions() {
   const [selectHotelButton, setSelectHotelButton] = useState();
   const [selectRoomButton, setSelectRoomButton] = useState();
   const [bookedRooms, setBookedRooms] = useState();
-
+  
+  console.log(booking);
   useEffect(() => {
     getTickets(token)
       .then(ans => setTicket(ans))
@@ -48,9 +49,16 @@ export default function BookingOptions() {
   }
 
   function bookRoom(token, roomId) {
-    sendBooking(token, { roomId: roomId })
-      .then(ans => toast('Quarto reservado com sucesso!'))
-      .catch(ans => toast('Não foi possível fazer a reserva!'));
+    if (!changeRoom) {
+      sendBooking(token, { roomId: roomId })
+        .then(ans => toast('Quarto reservado com sucesso'))
+        .catch(ans => toast('Não foi possível fazer a reserva!'));
+    } else {
+      updateBooking(token, { roomId: roomId }, booking.id)
+        .then(ans => toast('Troca de quarto reservado com sucesso'))
+        .catch(ans => toast('Não foi possível fazer a troca do quarto'));
+    }
+    window.location.reload();
   }
 
   return (
@@ -59,7 +67,7 @@ export default function BookingOptions() {
       <Subtitle>Primeiro escolha seu hotel!</Subtitle>
       <HotelOptions>
         {hotels.map((hotel, i, arr) => (
-          <HotelCard 
+          <HotelCard
             key={hotel.id}
             hotelId={hotel.id}
             token={token}
@@ -83,11 +91,11 @@ export default function BookingOptions() {
               rooms.map(room => (
                 <RoomCard
                   key={room.id}
-                  roomId={room.id} 
+                  roomId={room.id}
                   roomName={room.name}
                   roomCapacity={room.capacity}
                   bookedRooms={bookedRooms}
-                  selectRoomButton={selectRoomButton} 
+                  selectRoomButton={selectRoomButton}
                   setSelectRoomButton={setSelectRoomButton}
                   setSelectRoom={setSelectRoom}
                   selectRomm={selectRomm}
@@ -143,6 +151,7 @@ export const BookingButton = styled.button`
   text-align: center;
   color: #000000;
   border: none;
+  margin-top: 30px;
   width: 182px;
   height: 37px;
   background: #e0e0e0;

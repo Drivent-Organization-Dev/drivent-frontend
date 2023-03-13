@@ -8,20 +8,23 @@ export function BookingPage() {
   const token = useToken();
   console.log(booking);
 
+  const [changeRoom, setChangeRoom] = useState(false);
+
   useEffect(() => {
     getBooking(token)
       .then((r) => setBooking(r))
       .catch((e) => console.log(e));
   }, []
   );
-  if (booking) return (
+  console.log('booking', booking);
+  if(booking && !changeRoom)return(
     <>
-      <CurrentBooking booking={booking}></CurrentBooking>
+      <CurrentBooking booking={booking} setChangeRoom={setChangeRoom}></CurrentBooking>
     </>
   );
   return (
     <>
-      <BookingOptions></BookingOptions>
+      <BookingOptions changeRoom={changeRoom} booking={booking}></BookingOptions>
     </>
   );
 }
