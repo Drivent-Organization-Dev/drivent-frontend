@@ -9,10 +9,7 @@ export function CurrentBooking( { booking, setChangeRoom } ) {
   const [hotel, setHotel] = useState();
   useEffect(() => {
     getRooms(token, booking.Room.hotelId)
-      .then(r => {
-        console.log(r);
-        setHotel(r);
-      })
+      .then(r => setHotel(r))
       .catch(e => console.log(e));
   }, []
   );
