@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import useToken from '../../hooks/useToken';
 import { Hotel } from './HotelCard';
 
-export function CurrentBooking( { booking } ) {
+export function CurrentBooking( { booking, setChangeRoom } ) {
   const token = useToken();
   const [hotel, setHotel] = useState();
   useEffect(() => {
@@ -29,7 +29,7 @@ export function CurrentBooking( { booking } ) {
         <span><strong>Pessoas no seu quarto</strong></span>
         <span>{'Você e mais ' + (booking?.Room.capacity - 1)}</span>
       </Hotel>
-      <BookingButton>TROCAR DE QUARTO</BookingButton>
+      <BookingButton onClick={() => setChangeRoom(true)}>TROCAR DE QUARTO</BookingButton>
     </>
   );
 }

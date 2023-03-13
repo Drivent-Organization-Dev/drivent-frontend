@@ -8,6 +8,8 @@ export function BookingPage() {
   const token = useToken();
   console.log(booking);
 
+  const [changeRoom, setChangeRoom] = useState(false);
+
   useEffect(() =>
   {
     getBooking(token)
@@ -15,14 +17,14 @@ export function BookingPage() {
       .catch((e) => console.log(e));
   }, []
   );
-  if(booking)return(
+  if(booking && !changeRoom)return(
     <>
-      <CurrentBooking booking={booking}></CurrentBooking>
+      <CurrentBooking booking={booking} setChangeRoom={setChangeRoom}></CurrentBooking>
     </>
   );
   return(
     <>
-      <BookingOptions></BookingOptions>
+      <BookingOptions changeRoom={changeRoom} bookingId={booking}></BookingOptions>
     </>
   );
 }
