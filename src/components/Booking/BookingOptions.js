@@ -20,7 +20,8 @@ export default function BookingOptions({ changeRoom, booking }) {
   const [selectHotelButton, setSelectHotelButton] = useState();
   const [selectRoomButton, setSelectRoomButton] = useState();
   const [bookedRooms, setBookedRooms] = useState();
-
+  
+  console.log(booking);
   useEffect(() => {
     getTickets(token)
       .then(ans => setTicket(ans))
@@ -57,6 +58,7 @@ export default function BookingOptions({ changeRoom, booking }) {
         .then(ans => toast('Troca de quarto reservado com sucesso'))
         .catch(ans => toast('Não foi possível fazer a troca do quarto'));
     }
+    window.location.reload();
   }
 
   return (
@@ -149,6 +151,7 @@ export const BookingButton = styled.button`
   text-align: center;
   color: #000000;
   border: none;
+  margin-top: 30px;
   width: 182px;
   height: 37px;
   background: #e0e0e0;

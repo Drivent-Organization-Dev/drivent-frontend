@@ -16,7 +16,7 @@ export function CurrentBooking( { booking, setChangeRoom } ) {
       .catch(e => console.log(e));
   }, []
   );
-  console.log(hotel);
+  console.log(booking);
   return(
     <>
       <Title>Escolha de hotel e quarto</Title>

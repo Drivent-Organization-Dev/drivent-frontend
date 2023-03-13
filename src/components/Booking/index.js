@@ -17,6 +17,7 @@ export function BookingPage() {
       .catch((e) => console.log(e));
   }, []
   );
+  console.log('booking', booking);
   if(booking && !changeRoom)return(
     <>
       <CurrentBooking booking={booking} setChangeRoom={setChangeRoom}></CurrentBooking>
@@ -24,7 +25,7 @@ export function BookingPage() {
   );
   return(
     <>
-      <BookingOptions changeRoom={changeRoom} bookingId={booking}></BookingOptions>
+      <BookingOptions changeRoom={changeRoom} booking={booking}></BookingOptions>
     </>
   );
 }
