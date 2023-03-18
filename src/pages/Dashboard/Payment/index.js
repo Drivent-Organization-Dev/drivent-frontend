@@ -9,7 +9,6 @@ import SelectTicket from '../../../components/Payments/SelectTicket';
 export default function Payment() {
   //HOOKS FOR PAYMENT AND ENROLLMENT
   const { paymentLoading, payment, enrollmentLoading, enrollment } = usePayment();
-  console.log('payment', payment);
 
   // WHEN USER IS NOT ENROLLED OR LOGGED IN
   while (enrollment === '' || enrollment === undefined || enrollment === null) {

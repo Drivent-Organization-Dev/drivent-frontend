@@ -1,9 +1,9 @@
+import Loader from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-//MODULES FOR TICKET TYPE
 import ChoiceBox from '../ChoiceBox';
 import useTicketType from '../../hooks/api/useTicketType';
 import useTicket from '../../hooks/api/useTicket';
@@ -12,36 +12,46 @@ import useToken from '../../hooks/useToken';
 export default function SelectTicket() {
   const navigate = useNavigate();
   const token = useToken();
-  //POST TICKET AND TICKET TYPE
+
   const [ticket, setTicket] = useState({ isRemote: false, includesHotel: false, price: 0, });
-  const { postTicketType } = useTicketType();
   const { postTicket } = useTicket();
+  const { ticketType } = useTicketType(); 
+  const [isRemoteTicket, setIsRemoteTicket] = useState('');
+  const [hotelSelector, setHotelSelector] = useState('');
+  const [ticketPrice, setTicketPrice] = useState(0);
+  const [hotelPrice, setHotelPrice] = useState(1);
+  const ticketType1 = { price: 60000, includesHotel: true, isRemote: false };
+  const ticketType2 = { price: 25000, includesHotel: false, isRemote: false };
+  const ticketType3 = { price: 10000, includesHotel: false, isRemote: true };
 
-  // STATES FOR TICKET TYPE AND PRICE
-  const [isRemoteTicket, setIsRemoteTicket] = useState(''); // TRUE IF REMOTE TICKET IS SELECTED
-  const [hotelSelector, setHotelSelector] = useState(''); // TRUE IF TICKET WITH HOTEL IS SELECTED
-  const [ticketPrice, setTicketPrice] = useState(0); // PRICE OF TICKET (REMOTE OR PRESENTIAL)
-  const [hotelPrice, setHotelPrice] = useState(1); // PRICE OF HOTEL TICKET (WITH OR WITHOUT HOTEL)
-
-  //UPDATE STATES WHEN API DATA CHANGES
   useEffect(() => {
     setTicket({
-      isRemote: !isRemoteTicket,
+      isRemote: !isRemoteTicket,  //criar ticketType1, ticketType2 e ticketType3, com os valores recebidos do ticketType
       includesHotel: hotelSelector === '' || isRemoteTicket === false ? true : !hotelSelector, // IF REMOTE TICKET IS SELECTED, ITS NOT POSSIBLE TO SELECT HOTEL TICKET
       price: !isRemoteTicket ? Number(ticketPrice) : Number(ticketPrice) + Number(hotelPrice), // IF REMOTE TICKET IS SELECTED, HOTEL PRICE IS NOT ADDED
     });
   }, [isRemoteTicket, hotelSelector, ticketPrice, hotelPrice]);
 
-  //SUBMIT TICKET WHEN CLICK ON BUTTON
-  async function submitTicket(ticket) {
+  async function submitTicket() {
     try {
-      const postedTicketType = await postTicketType(ticket, token);
-      await postTicket({ ticketTypeId: postedTicketType.id }, token);
+      // se price do ticket for igual ao TicketType1, ticketID = 1
+      // se price do ticket for igual ao TicketType2, ticketID = 2
+      // se price do ticket for igual ao TicketType3, ticketID = 3
+      const ticketID = ticket.price === ticketType1.price ? 1 : ticket.price === ticketType2.price ? 2 : 3;
+      await postTicket({ ticketTypeId: ticketID }, token);
       navigate(0);
     } catch (error) {
       toast('Não foi possivel reservar seu ingresso!');
     }
   }
+
+  while(ticketType === '' || ticketType === undefined || ticketType === null) {
+    return (
+      <>
+        <span>{<LoaderStyle color="#000000" height={26} width={26} type="Oval" />} Carregando</span>
+      </>
+    );
+  };
 
   return (
     <>
@@ -50,7 +60,7 @@ export default function SelectTicket() {
       <ContainerOptions>
         <ChoiceBox
           description={'Presencial'}
-          price={250}
+          price={ticketType2.price}
           selectState={isRemoteTicket === '' ? false : isRemoteTicket}
           selector={setIsRemoteTicket}
           setPrice={setTicketPrice}
@@ -58,7 +68,7 @@ export default function SelectTicket() {
         />
         <ChoiceBox
           description={'Online'}
-          price={100}
+          price={ticketType3.price}
           selectState={isRemoteTicket === '' ? false : !isRemoteTicket}
           selector={setIsRemoteTicket}
           setPrice={setTicketPrice}
@@ -81,7 +91,7 @@ export default function SelectTicket() {
               />
               <ChoiceBox
                 description={'Com Hotel'}
-                price={350}
+                price={( ticketType1.price - ticketType2.price )}
                 selectState={hotelSelector === '' ? false : !hotelSelector}
                 selector={setHotelSelector}
                 setPrice={setHotelPrice}            
@@ -146,3 +156,7 @@ const BookingButton = styled.button`
   border-radius: 4px;
 `;
 
+const LoaderStyle = styled(Loader)`
+  position: relative;
+  top: -4.5px;
+`;
