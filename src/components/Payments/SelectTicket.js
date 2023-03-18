@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-
 import ChoiceBox from '../ChoiceBox';
 import useTicketType from '../../hooks/api/useTicketType';
 import useTicket from '../../hooks/api/useTicket';
@@ -26,17 +25,14 @@ export default function SelectTicket() {
 
   useEffect(() => {
     setTicket({
-      isRemote: !isRemoteTicket,  //criar ticketType1, ticketType2 e ticketType3, com os valores recebidos do ticketType
-      includesHotel: hotelSelector === '' || isRemoteTicket === false ? true : !hotelSelector, // IF REMOTE TICKET IS SELECTED, ITS NOT POSSIBLE TO SELECT HOTEL TICKET
-      price: !isRemoteTicket ? Number(ticketPrice) : Number(ticketPrice) + Number(hotelPrice), // IF REMOTE TICKET IS SELECTED, HOTEL PRICE IS NOT ADDED
+      isRemote: !isRemoteTicket,
+      includesHotel: hotelSelector === '' || isRemoteTicket === false ? true : !hotelSelector,
+      price: !isRemoteTicket ? Number(ticketPrice) : Number(ticketPrice) + Number(hotelPrice),
     });
   }, [isRemoteTicket, hotelSelector, ticketPrice, hotelPrice]);
 
   async function submitTicket() {
     try {
-      // se price do ticket for igual ao TicketType1, ticketID = 1
-      // se price do ticket for igual ao TicketType2, ticketID = 2
-      // se price do ticket for igual ao TicketType3, ticketID = 3
       const ticketID = ticket.price === ticketType1.price ? 1 : ticket.price === ticketType2.price ? 2 : 3;
       await postTicket({ ticketTypeId: ticketID }, token);
       navigate(0);
@@ -75,7 +71,6 @@ export default function SelectTicket() {
           disable={false}
         />
       </ContainerOptions>
-      {/* IF TICKETPRICE IS DIFFERENT FROM ZERO, WILL APPEAR THE NEXT OPTIONS */}
       {
         ticketPrice !== 0 && (
           <>
@@ -98,7 +93,6 @@ export default function SelectTicket() {
                 disable={!isRemoteTicket}
               />        
             </ContainerOptions>
-            {/* IF HOTELPRICE IS DIFFERENT FROM ZERO, WILL APPEAR RESERVATION BUTTOM */}
             {
               hotelPrice !== 1 || (hotelPrice === 1 && !isRemoteTicket) ? (
                 <>

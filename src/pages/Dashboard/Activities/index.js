@@ -1,3 +1,9 @@
+import { ActivitiesPage } from '../../../components/Activities';
+
 export default function Activities() {
-  return 'Atividades: Em breve!';
+  return(
+    <>
+      <ActivitiesPage></ActivitiesPage>
+    </>
+  );
 }

@@ -4,7 +4,6 @@ export async function getTicketTypes(token) {
   const response = await api.get('/tickets/types', {
     headers: { Authorization: `Bearer ${token}`, },
   });
-  console.log('TICKETTYPE API DATA: ', response.data);
   return response.data;
 }
 

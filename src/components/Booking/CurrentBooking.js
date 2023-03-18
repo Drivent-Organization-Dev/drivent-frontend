@@ -12,7 +12,6 @@ export function CurrentBooking( { booking } ) {
       .catch(e => console.log(e));
   }, []
   );
-  console.log(hotel);
   return(
     <>
       <Title>Escolha de hotel e quarto</Title>

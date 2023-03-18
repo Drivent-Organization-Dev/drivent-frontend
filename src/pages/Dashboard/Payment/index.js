@@ -1,16 +1,12 @@
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
-
-//MODULES FOR TICKET TYPE
 import usePayment from '../../../hooks/api/usePayment';
 import CardScreen from '../../../components/Payments/CardScreen';
 import SelectTicket from '../../../components/Payments/SelectTicket';
 
 export default function Payment() {
-  //HOOKS FOR PAYMENT AND ENROLLMENT
   const { paymentLoading, payment, enrollmentLoading, enrollment } = usePayment();
 
-  // WHEN USER IS NOT ENROLLED OR LOGGED IN
   while (enrollment === '' || enrollment === undefined || enrollment === null) {
     return (
       <>
@@ -20,7 +16,6 @@ export default function Payment() {
     );
   }
 
-  // WHILE ENROLLMENT AND PAYMENT ARE LOADING, RENDER SPINNER
   if (paymentLoading || enrollmentLoading) {
     return (
       <>
@@ -45,7 +40,6 @@ export default function Payment() {
   }
 }
 
-//STYLES
 const PaymentTitle = styled.p`
   font-family: 'Roboto';
   font-style: normal;
