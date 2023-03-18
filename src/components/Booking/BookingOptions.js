@@ -35,7 +35,11 @@ export default function BookingOptions({ changeRoom, booking }) {
   }, []);
 
   if (!ticket || !hotels) {
-    return (<Title>Carregando...</Title>);
+    return (
+      <>
+        <span>{<LoaderStyle color="#000000" height={26} width={26} type="Oval" />} Carregando</span>
+      </>
+    );  
   }
 
   if (ticket?.TicketType.isRemote) {
@@ -160,4 +164,9 @@ export const BookingButton = styled.button`
   :hover {
     cursor: pointer;
   }
+`;
+
+const LoaderStyle = styled(Loader)`
+  position: relative;
+  top: -4.5px;
 `;
