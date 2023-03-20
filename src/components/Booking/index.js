@@ -6,7 +6,6 @@ import BookingOptions from './BookingOptions';
 export function BookingPage() {
   const [booking, setBooking] = useState();
   const token = useToken();
-  console.log(booking);
 
   const [changeRoom, setChangeRoom] = useState(false);
 
@@ -16,7 +15,7 @@ export function BookingPage() {
       .catch((e) => console.log(e));
   }, []
   );
-  console.log('booking', booking);
+
   if(booking && !changeRoom)return(
     <>
       <CurrentBooking booking={booking} setChangeRoom={setChangeRoom}></CurrentBooking>
