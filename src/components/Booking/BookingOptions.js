@@ -21,7 +21,6 @@ export default function BookingOptions({ changeRoom, booking }) {
   const [selectRoomButton, setSelectRoomButton] = useState();
   const [bookedRooms, setBookedRooms] = useState();
   
-  console.log(booking);
   useEffect(() => {
     getTickets(token)
       .then(ans => setTicket(ans))
@@ -124,7 +123,7 @@ const RoomOptions = styled.div`
 `;
 
 export const Title = styled.p`
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 34px;
@@ -134,7 +133,7 @@ export const Title = styled.p`
 `;
 
 export const Subtitle = styled.p`
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
